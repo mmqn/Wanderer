@@ -76,7 +76,7 @@ const Card = props => {
 				<div className="row">
 					<p className="notes">{Notes}</p>
 
-					<div className="static-map">
+					<div className="static-map" style={{ width: mapImgWidth }}>
 						<img
 							src={mapImgUrl}
 							alt={`${Name} Map Preview`}
