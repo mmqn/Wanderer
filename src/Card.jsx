@@ -20,7 +20,7 @@ const Card = props => {
 		Notes
 	} = placeDetails;
 
-	const mapImgWidth = isMobile ? window.innerWidth - 60 : 400;
+	const mapImgWidth = isMobile ? window.innerWidth - 80 : 400;
 
 	const mapImgUrl =
 		"https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/" +
@@ -72,11 +72,11 @@ const Card = props => {
 				))}
 			</div>
 
-			{(condensed && !openCard) || (
+			{(openCard || !condensed) && (
 				<div className="row">
 					<p className="notes">{Notes}</p>
 
-					<div className="static-map" style={{ width: mapImgWidth }}>
+					<div className="static-map" style={{ width: mapImgWidth, height: '120px' }}>
 						<img
 							src={mapImgUrl}
 							alt={`${Name} Map Preview`}
