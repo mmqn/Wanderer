@@ -1,40 +1,38 @@
-import React, { useRef, useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+import React, { useRef, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
+const DEFAULT_MAP_VIEW = { center: [-118.243683, 34.052235], zoom: 9 };
 
 const Map = ({ mapboxKey }) => {
-	const mapContainer = useRef(null);
+  const [map, setMap] = useState(null);
 
-	const [mapView, setMapView] = useState({
-		center: [-118.243683, 34.052235],
-		zoom: 9
-	});
-	const [mapLoaded, setMapLoaded] = useState(false);
+  const mapContainer = useRef(null);
 
-	mapboxgl.accessToken = mapboxKey;
+  useEffect(() => {
+    mapboxgl.accessToken = mapboxKey;
 
-	useEffect(() => {
-		const map = new mapboxgl.Map({
-			container: mapContainer.current,
-			style: "mapbox://styles/mapbox/streets-v11",
-			center: mapView.center,
-			zoom: mapView.zoom
-		});
+    const newMap = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/dark-v10',
+      center: DEFAULT_MAP_VIEW.center,
+      zoom: DEFAULT_MAP_VIEW.zoom,
+    });
 
-		setMapLoaded(true);
-	}, [mapLoaded]);
+    setMap(newMap);
+  }, [mapboxKey, mapContainer]);
 
-	return (
-		<div
-			style={{ width: "99vw", height: "98vh", margin: "auto" }}
-			ref={mapContainer}
-		/>
-	);
+  return (
+    <div
+      style={{ width: '99vw', height: '98vh', margin: 'auto' }}
+      ref={mapContainer}
+    />
+  );
 };
 
 Map.propTypes = {
-	mapboxKey: PropTypes.string.isRequired
+  mapboxKey: PropTypes.string.isRequired,
 };
 
 export default Map;

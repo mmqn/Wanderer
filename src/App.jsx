@@ -1,68 +1,84 @@
-import React, { useState, useEffect, Fragment } from "react";
-import "./util/App.css";
-// import Map from "./Map";
-import List from "./List";
-import ErrorMessage from "./util/ErrorMessage";
-// import { unsplashCredit } from "./util/elements";
+import React, { useState, useEffect } from 'react';
+import './styles/App.css';
+import List from './List';
+import Map from './Map';
+import ErrorMessage from './util/ErrorMessage';
 
-const PLACES_ENDPOINT = "https://wanderer-mmqn.firebaseio.com/places.json";
+const PLACES_ENDPOINT = 'https://wanderer-mmqn.firebaseio.com/places.json';
 const MAPBOX_APIKEY =
-	"pk.eyJ1IjoibW1xbiIsImEiOiJjazAxNDdtMGUwN3RxM2JwNGxzYWdqeDltIn0.Ctg235d9st1jNa25YSaFlg";
+  'pk.eyJ1IjoibW1xbiIsImEiOiJjazAxNDdtMGUwN3RxM2JwNGxzYWdqeDltIn0.Ctg235d9st1jNa25YSaFlg';
 
 export default () => {
-	const [goodResponse, setGoodResponse] = useState(false);
-	const [places, setPlaces] = useState([]);
-	const [minimizeHeader, setMinimizeHeader] = useState(false);
-	const [isMobile, setIsMobile] = useState(window.innerWidth < 415);
+  const [goodResponse, setGoodResponse] = useState(false);
+  const [places, setPlaces] = useState([]);
+  const [minimizeHeader, setMinimizeHeader] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 415);
 
-	useEffect(() => {
-		fetch(PLACES_ENDPOINT)
-			.then(response => {
-				const { status } = response;
+  const fetchData = async () => {
+    const response = await fetch(PLACES_ENDPOINT);
+    const status = response.status;
+    const places = await response.json();
 
-				if (status === 200) {
-					setGoodResponse(true);
-					return response.json();
-				}
-			})
-			.then(places => setPlaces(places));
+    if (status === 200) {
+      setGoodResponse(true);
+      setPlaces(places);
+    } else {
+      console.warn(status, response);
+    }
+    // .then(response => {
+    //   const { status } = response;
 
-		window.addEventListener("scroll", () => {
-			if (window.pageYOffset >= 40) setMinimizeHeader(true);
-			else if (window.pageYOffset < 40) setMinimizeHeader(false);
-		});
+    //   if (status === 200) {
+    //     setGoodResponse(true);
+    //     return response.json();
+    //   }
+    // })
+    // .then(places => places);
+  };
 
-		window.addEventListener("resize", ev => {
-			const { innerWidth } = ev.target;
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-			if (isMobile && innerWidth >= 415) setIsMobile(false);
-			else if (!isMobile && innerWidth < 415) setIsMobile(true);
-		});
-	}, [isMobile]);
+  useEffect(() => {
+    const handleUpdateHeaderSize = window.addEventListener('scroll', () => {
+      if (window.pageYOffset >= 40) setMinimizeHeader(true);
+      else if (window.pageYOffset < 40) setMinimizeHeader(false);
+    });
 
-	return (
-		<Fragment>
-			<h1
-				className={`header ${
-					minimizeHeader ? "minimize-header" : "maximize-header"
-				}`}
-			>
-				Wanderer
-			</h1>
+    const handleUpdateIsMobile = window.addEventListener('resize', ev => {
+      const { innerWidth } = ev.target;
 
-			{goodResponse === true && places && places.length > 0 ? (
-				<Fragment>
-					<List places={places} isMobile={isMobile} mapboxKey={MAPBOX_APIKEY} />
+      if (innerWidth >= 415) setIsMobile(false);
+      else if (innerWidth < 415) setIsMobile(true);
+    });
 
-					{/* <Map mapboxKey={MAPBOX_APIKEY} /> */}
+    // Run on unmounting; cleanup
+    return () => {
+      window.removeEventListener('sroll', handleUpdateHeaderSize);
+      window.removeEventListener('resize', handleUpdateIsMobile);
+    };
+  }, []);
 
-					{/* <div style={{ position: "fixed", bottom: "10px", left: "10px" }}>
-						{unsplashCredit}
-					</div> */}
-				</Fragment>
-			) : (
-				<ErrorMessage />
-			)}
-		</Fragment>
-	);
+  return (
+    <>
+      <h1
+        className={`header ${
+          minimizeHeader ? 'minimize-header' : 'maximize-header'
+        }`}
+      >
+        Wanderer
+      </h1>
+
+      {goodResponse === true && places.length > 0 ? (
+        <>
+          {/* <List places={places} isMobile={isMobile} mapboxKey={MAPBOX_APIKEY} /> */}
+
+          <Map mapboxKey={MAPBOX_APIKEY} />
+        </>
+      ) : (
+        <ErrorMessage />
+      )}
+    </>
+  );
 };
