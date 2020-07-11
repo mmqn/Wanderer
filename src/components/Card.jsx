@@ -48,6 +48,7 @@ const Card = props => {
   return (
     <div
       className='card has-hidden-child'
+      style={{ cursor: isMinimal ? 'auto' : 'pointer' }}
       onClick={() => setOpenCard(!openCard)}
     >
       <h2 className='use-ellipsis'>{Name}</h2>

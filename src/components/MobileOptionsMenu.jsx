@@ -70,7 +70,7 @@ const MobileOptionsMenu = ({
             <div
               key={`${filter.targetFilterType}-${filter.targetFilterValue}`}
               style={{}}
-              className='filter-type-value-set delete'
+              className='filter-typevalue delete'
               role='button'
               onClick={e => {
                 e.stopPropagation();

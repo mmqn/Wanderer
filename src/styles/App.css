@@ -227,7 +227,7 @@ a:active {
   border: 1px solid #ffffff;
 }
 
-.filter-type-value-set {
+.filter-typevalue {
   cursor: pointer;
   position: relative;
   margin-bottom: 8px;
@@ -241,17 +241,17 @@ a:active {
   -moz-transition: border 0.8s cubic-bezier(0.2, 0.8, 0.6, 1);
 }
 
-.filter-type-value-set:hover {
+.filter-typevalue:hover {
   border: 1px solid #e4c200;
 }
 
-.filter-type-value-set .filter-type {
+.filter-typevalue .filter-type {
   font-size: 0.7rem;
   color: #ffffff;
   border-bottom: 0.2px solid #777777;
 }
 
-.filter-type-value-set .filter-value {
+.filter-typevalue .filter-value {
   color: #ffffff;
 }
 
@@ -266,7 +266,6 @@ a:active {
 }
 
 .card {
-  cursor: pointer;
   position: relative;
   min-height: 80px;
   max-height: 220px;
@@ -445,14 +444,20 @@ a:active {
   padding: 6px;
 }
 
-.mobile-command-bar {
+.map-card-container {
+  z-index: 2;
   position: fixed;
-  bottom: 0px;
-  left: 0px;
-  width: 100vw;
-  height: 50px;
-  color: #ffffff;
-  background-color: #000000cc;
+  bottom: 20px;
+}
+
+.card-close-button {
+  z-index: 3;
+  position: absolute;
+  top: 30px;
+  border: 1px solid #e4c200;
+  padding: 2px 6px;
+  border-radius: 12px;
+  background-color: #0f0f0f;
 }
 
 /* desktop-ish */
@@ -497,6 +502,15 @@ a:active {
     margin: 20px 0px;
     width: 630px;
   }
+
+  .map-card-container {
+    width: auto;
+  }
+
+  .card-close-button {
+    right: 10px;
+    color: #ffffff;
+  }
 }
 
 /* mobile-ish */
@@ -527,5 +541,25 @@ a:active {
   .card {
     margin: 22px 16px;
     max-height: none;
+  }
+
+  .map-card-container {
+    width: 100vw;
+  }
+
+  .card-close-button {
+    right: 25px;
+    font-size: 0.8rem;
+    color: #e4c200;
+  }
+
+  .mobile-command-bar {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 50px;
+    color: #ffffff;
+    background-color: #000000cc;
   }
 }

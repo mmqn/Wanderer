@@ -205,7 +205,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
               {appliedFilters.map(filter => (
                 <div
                   key={`${filter.targetFilterType}-${filter.targetFilterValue}`}
-                  className='filter-type-value-set remove-filter'
+                  className='filter-typevalue remove-filter'
                   role='button'
                   onClick={() => handleRemoveFilter(filter)}
                 >

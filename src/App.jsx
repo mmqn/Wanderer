@@ -11,7 +11,7 @@ const MAPBOX_APIKEY =
 export default () => {
   const [goodResponse, setGoodResponse] = useState(false);
   const [places, setPlaces] = useState([]);
-  const [isListView, setIsListView] = useState(true);
+  const [isMapView, setIsMapView] = useState(true);
   const [minimizeHeader, setMinimizeHeader] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 415);
 
@@ -60,16 +60,16 @@ export default () => {
         className={`header ${
           minimizeHeader ? 'minimize-header' : 'maximize-header'
         }`}
-        onClick={() => setIsListView(prevValue => !prevValue)}
+        onClick={() => setIsMapView(prevValue => !prevValue)}
       >
         Wanderer
       </h1>
 
       {goodResponse === true && places.length > 0 ? (
-        isListView ? (
-          <List places={places} isMobile={isMobile} mapboxKey={MAPBOX_APIKEY} />
+        isMapView ? (
+          <Map places={places} isMobile={isMobile} mapboxKey={MAPBOX_APIKEY} />
         ) : (
-          <Map places={places} mapboxKey={MAPBOX_APIKEY} />
+          <List places={places} isMobile={isMobile} mapboxKey={MAPBOX_APIKEY} />
         )
       ) : (
         <ErrorMessage />

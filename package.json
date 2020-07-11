@@ -4,10 +4,10 @@
 	"homepage": "https://mmqn.github.io/wanderer",
 	"private": true,
 	"dependencies": {
-		"mapbox-gl": "^1.1.1",
-		"react": "^16.8.6",
-		"react-dom": "^16.8.6",
-		"react-scripts": "3.0.1"
+		"mapbox-gl": "^1.11.1",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"react-scripts": "^3.4.1"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -33,6 +33,6 @@
 		]
 	},
 	"devDependencies": {
-		"gh-pages": "^2.1.1"
+		"gh-pages": "^2.2.0"
 	}
 }

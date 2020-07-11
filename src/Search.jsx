@@ -55,7 +55,7 @@ const Search = ({ uniqueValues, handleFiltering }) => {
           {matchedFilters.map((filter, i) => (
             <div
               key={`${i}-${filter.targetFilterType}-${filter.targetFilterValue}`}
-              className='filter-type-value-set'
+              className='filter-typevalue'
               style={{ margin: '4px' }}
               role='button'
               onClick={() => {

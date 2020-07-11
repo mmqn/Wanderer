@@ -6,7 +6,7 @@ import Card from './components/Card';
 
 const DEFAULT_MAP_VIEW = { center: [-118.243683, 34.052235], zoom: 9 };
 
-const Map = ({ places, mapboxKey }) => {
+const Map = ({ places, isMobile, mapboxKey }) => {
   const [map, setMap] = useState(null);
   const [markerRefs, setMarkerRefs] = useState([]);
   const [selectedPlaceDetails, setSelectedPlaceDetails] = useState(null);
@@ -72,22 +72,17 @@ const Map = ({ places, mapboxKey }) => {
             zIndex: '2',
             position: 'fixed',
             bottom: '30px',
+            width: isMobile ? '90vw' : 'auto',
           }}
         >
           <Card isMinimal placeDetails={selectedPlaceDetails} />
 
           <button
             type='button'
-            style={{
-              zIndex: '3',
-              position: 'absolute',
-              top: '30px',
-              right: '10px',
-              backgroundColor: '#000000',
-            }}
+            className='card-close-button'
             onClick={() => handleMountPlaceCard(null)}
           >
-            Close
+            {isMobile ? 'X' : 'Close'}
           </button>
         </div>
       )}
@@ -112,6 +107,7 @@ Map.propTypes = {
       }),
     }),
   ).isRequired,
+  isMobile: PropTypes.bool.isRequired,
   mapboxKey: PropTypes.string.isRequired,
 };
 
