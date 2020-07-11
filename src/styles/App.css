@@ -146,6 +146,7 @@ a:active {
 }
 
 .header {
+  cursor: pointer;
   position: fixed;
   z-index: 2;
   margin: 0px;
@@ -428,6 +429,22 @@ a:active {
   padding: 0px 4px;
 }
 
+.map-marker {
+  cursor: pointer;
+  width: 12px;
+  height: 12px;
+  border-radius: 14px;
+  background-color: #e4c200;
+  border: 1px solid #ffffff;
+  transition: padding 0.8s cubic-bezier(0.2, 0.8, 0.6, 1);
+  -webkit-transition: padding 0.8s cubic-bezier(0.2, 0.8, 0.6, 1);
+  -moz-transition: padding 0.8s cubic-bezier(0.2, 0.8, 0.6, 1);
+}
+
+.map-marker:hover {
+  padding: 6px;
+}
+
 .mobile-command-bar {
   position: fixed;
   bottom: 0px;
@@ -479,10 +496,6 @@ a:active {
   .card {
     margin: 20px 0px;
     width: 630px;
-  }
-
-  .notes {
-    max-width: 220px;
   }
 }
 

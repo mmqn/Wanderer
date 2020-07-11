@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Search from './Search.jsx';
-import Card from './Card';
-import { checkPlaceAgainstFilter } from './util/utilFunctions';
-import MobileOptionsMenu from './util/MobileOptionsMenu.jsx';
+import Card from './components/Card';
+import checkPlaceAgainstFilter from './util/checkPlaceAgainstFilter';
+import MobileOptionsMenu from './components/MobileOptionsMenu.jsx';
 
 const List = ({ places, isMobile, mapboxKey }) => {
   const [currentPlaces, setCurrentPlaces] = useState([]);
   const [appliedFilters, setAppliedFilters] = useState([]);
   const [condensedCards, setCondensedCards] = useState(true);
   const [stackedView, setStackedView] = useState(false);
-  // currently selected category when in stacked view
+  // Currently open category when in stacked view
   const [currentSelectedCategory, setCurrentSelectedCategory] = useState('');
 
-  useEffect(() => setCurrentPlaces(places), [places]);
+  useEffect(() => {
+    setCurrentPlaces(places);
+  }, [places]);
 
   const uniqueValues = useMemo(() => {
     const Name = places.map(property => property.Name);
@@ -28,11 +30,11 @@ const List = ({ places, isMobile, mapboxKey }) => {
   }, [places]);
 
   /**
-   * @param {Object} filters: Array of objects with following shape:
+   * @param {Array of Objects} filters: Objects follows shape:
    * {
-   * 	id: {String},
-   * 	targetFilterType: {String},
-   * 	targetFilterValue: {String}
+   *    id: {String},
+   * 	  targetFilterType: {String},
+   * 	  targetFilterValue: {String},
    * }
    */
   const applyFilters = filters => {
@@ -70,7 +72,11 @@ const List = ({ places, isMobile, mapboxKey }) => {
 
   /**
    * @param {Object} newFilter: Object with following shape:
-   * { id: {String}, targetFilterType: {String}, targetFilterValue: {String} }
+   * {
+   *    id: {String},
+   *    targetFilterType: {String},
+   *    targetFilterValue: {String},
+   * }
    */
   const handleFiltering = newFilter => {
     const mergedFilters =
@@ -91,13 +97,13 @@ const List = ({ places, isMobile, mapboxKey }) => {
     applyFilters(filteredAppliedFilters);
   };
 
-  const handleCardsDensity = ev => {
-    ev.stopPropagation();
+  const handleCardsDensity = e => {
+    e.stopPropagation();
     setCondensedCards(prevValue => !prevValue);
   };
 
-  const handleCardsStacking = ev => {
-    ev.stopPropagation();
+  const handleCardsStacking = e => {
+    e.stopPropagation();
     setStackedView(prevValue => !prevValue);
   };
 
@@ -130,7 +136,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
                 <Card
                   key={place.id}
                   placeDetails={place}
-                  condensed={condensedCards}
+                  isCondensed={condensedCards}
                   isMobile={isMobile}
                   mapboxKey={mapboxKey}
                   handleFiltering={handleFiltering}
@@ -159,7 +165,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
         <Card
           key={place.id}
           placeDetails={place}
-          condensed={condensedCards}
+          isCondensed={condensedCards}
           isMobile={isMobile}
           mapboxKey={mapboxKey}
           handleFiltering={handleFiltering}
@@ -204,6 +210,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
                   onClick={() => handleRemoveFilter(filter)}
                 >
                   <div className='filter-type'>{filter.targetFilterType}</div>
+
                   <div className='filter-value'>{filter.targetFilterValue}</div>
                 </div>
               ))}
@@ -211,6 +218,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
           )}
 
           <button
+            type='button'
             style={{ position: 'fixed', bottom: '50px', right: '20px' }}
             onClick={() => setCondensedCards(prevValue => !prevValue)}
           >
@@ -218,6 +226,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
           </button>
 
           <button
+            type='button'
             style={{ position: 'fixed', bottom: '15px', right: '20px' }}
             onClick={() => setStackedView(prevValue => !prevValue)}
           >
@@ -230,7 +239,22 @@ const List = ({ places, isMobile, mapboxKey }) => {
 };
 
 List.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.object).isRequired,
+  places: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      Name: PropTypes.string,
+      Categories: PropTypes.arrayOf(PropTypes.string),
+      Description: PropTypes.string,
+      Notes: PropTypes.string,
+      Address: PropTypes.string,
+      City: PropTypes.string,
+      Region: PropTypes.string,
+      Coordinates: PropTypes.shape({
+        lat: PropTypes.number,
+        lng: PropTypes.number,
+      }),
+    }),
+  ).isRequired,
   isMobile: PropTypes.bool,
   mapboxKey: PropTypes.string,
 };

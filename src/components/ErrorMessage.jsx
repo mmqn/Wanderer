@@ -4,7 +4,7 @@ export default () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setShowErrorMessage(true), 2000);
+    const timeout = setTimeout(() => setShowErrorMessage(true), 3000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -18,6 +18,7 @@ export default () => {
       }}
     >
       <h1>Oh boy, looks like you broke something 🌦</h1>
+
       <p style={{ color: '#ffffff', lineHeight: '32px' }}>
         Just kidding, it's probably my fault. I would very much appreciate it if
         you would kindly send an{' '}

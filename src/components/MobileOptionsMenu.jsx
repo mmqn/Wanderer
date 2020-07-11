@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { expand, stack } from './elements';
+import { expand, stack } from '../components/icons';
 
 const MobileOptionsMenu = ({
   appliedFilters,
@@ -12,7 +12,9 @@ const MobileOptionsMenu = ({
 
   const hasAppliedFilters = appliedFilters.length > 0;
 
-  useEffect(() => setOpenMenu(false), [hasAppliedFilters]);
+  useEffect(() => {
+    setOpenMenu(false);
+  }, [hasAppliedFilters]);
 
   return (
     <div
@@ -23,9 +25,11 @@ const MobileOptionsMenu = ({
       <div>
         {hasAppliedFilters && (
           <button
+            type='button'
             style={{ float: 'left', paddingTop: '13px', paddingLeft: '14px' }}
           >
             <span style={{ color: '#e4c200' }}>{appliedFilters.length}</span>
+
             <span key={`flash-${appliedFilters.length}`} className='flash'>
               {appliedFilters.length > 1 ? ' Active Filters' : ' Active Filter'}
             </span>
@@ -35,10 +39,19 @@ const MobileOptionsMenu = ({
         <span
           style={{ float: 'right', paddingTop: '2px', paddingRight: '10px' }}
         >
-          <button style={{ padding: '8px' }} onClick={handleCardsDensity}>
+          <button
+            type='button'
+            style={{ padding: '8px' }}
+            onClick={handleCardsDensity}
+          >
             {expand}
           </button>
-          <button style={{ padding: '8px' }} onClick={handleCardsStacking}>
+
+          <button
+            type='button'
+            style={{ padding: '8px' }}
+            onClick={handleCardsStacking}
+          >
             {stack}
           </button>
         </span>
@@ -59,12 +72,13 @@ const MobileOptionsMenu = ({
               style={{}}
               className='filter-type-value-set delete'
               role='button'
-              onClick={ev => {
-                ev.stopPropagation();
+              onClick={e => {
+                e.stopPropagation();
                 handleRemoveFilter(filter);
               }}
             >
               <div className='filter-type'>{filter.targetFilterType}</div>
+
               <div className='filter-value'>{filter.targetFilterValue}</div>
             </div>
           ))}

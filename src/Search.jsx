@@ -34,8 +34,8 @@ const Search = ({ uniqueValues, handleFiltering }) => {
     } else setMatchedFilters([]);
   };
 
-  const handleSearch = ev => {
-    const query = ev.target.value;
+  const handleSearch = e => {
+    const query = e.target.value;
 
     setQuery(query);
     filterPlaces(query);
@@ -65,6 +65,7 @@ const Search = ({ uniqueValues, handleFiltering }) => {
               }}
             >
               <div className='filter-type'>{filter.targetFilterType}</div>
+
               <div className='filter-value'>{filter.targetFilterValue}</div>
             </div>
           ))}
