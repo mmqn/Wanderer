@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const Search = ({ uniqueValues, handleFiltering }) => {
   const [query, setQuery] = useState('');
   const [matchedFilters, setMatchedFilters] = useState([]);
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const flatValues = useMemo(() => {
     const flatUniqueValues = [];
@@ -42,36 +43,46 @@ const Search = ({ uniqueValues, handleFiltering }) => {
   };
 
   return (
-    <div className='search-bar'>
-      <input
-        type='text'
-        placeholder={`Search ${uniqueValues.Address.length} places...`}
-        value={query}
-        onChange={handleSearch}
-      />
+    <>
+      <div className='search-bar'>
+        <input
+          type='text'
+          placeholder={`Search ${uniqueValues.Address.length} places...`}
+          value={query}
+          onChange={handleSearch}
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
+        />
 
-      {matchedFilters.length > 0 && (
-        <div className='filter-results'>
-          {matchedFilters.map((filter, i) => (
-            <div
-              key={`${i}-${filter.targetFilterType}-${filter.targetFilterValue}`}
-              className='filter-typevalue'
-              style={{ margin: '4px' }}
-              role='button'
-              onClick={() => {
-                setQuery('');
-                setMatchedFilters([]);
-                handleFiltering(filter);
-              }}
-            >
-              <div className='filter-type'>{filter.targetFilterType}</div>
+        {query.length > 0 && (
+          <div className='search-results'>
+            {matchedFilters.length > 0 ? (
+              matchedFilters.map((filter, i) => (
+                <div
+                  key={`${i}-${filter.targetFilterType}-${filter.targetFilterValue}`}
+                  className='filter-typevalue'
+                  style={{ margin: '4px' }}
+                  role='button'
+                  onClick={() => {
+                    setQuery('');
+                    setMatchedFilters([]);
+                    handleFiltering(filter);
+                  }}
+                >
+                  <div className='filter-type'>{filter.targetFilterType}</div>
 
-              <div className='filter-value'>{filter.targetFilterValue}</div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+                  <div className='filter-value'>{filter.targetFilterValue}</div>
+                </div>
+              ))
+            ) : (
+              <span style={{ color: '#ffffff' }}>No results found 🌧</span>
+            )}
+          </div>
+        )}
+      </div>
+
+      {isInputFocused && <div className='background-cover' />}
+    </>
   );
 };
 

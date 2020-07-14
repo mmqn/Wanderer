@@ -9,7 +9,7 @@ const MAPBOX_APIKEY =
   'pk.eyJ1IjoibW1xbiIsImEiOiJjazAxNDdtMGUwN3RxM2JwNGxzYWdqeDltIn0.Ctg235d9st1jNa25YSaFlg';
 
 export default () => {
-  const [goodResponse, setGoodResponse] = useState(false);
+  const [goodResponse, setGoodResponse] = useState(true);
   const [places, setPlaces] = useState([]);
   const [isMapView, setIsMapView] = useState(true);
   const [minimizeHeader, setMinimizeHeader] = useState(false);
@@ -56,7 +56,7 @@ export default () => {
   return (
     <>
       <h1
-        title='Click to switch viewing mode'
+        title={`Click to switch to ${isMapView ? 'list' : 'map'} view`}
         className={`header ${
           minimizeHeader ? 'minimize-header' : 'maximize-header'
         }`}

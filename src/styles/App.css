@@ -200,7 +200,7 @@ a:active {
 }
 
 .search-bar {
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   top: 150px;
 }
@@ -217,7 +217,7 @@ a:active {
   text-align: center;
 }
 
-.search-bar .filter-results {
+.search-bar .search-results {
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
@@ -460,6 +460,27 @@ a:active {
   background-color: #0f0f0f;
 }
 
+.background-cover {
+  z-index: 1;
+  position: fixed;
+  width: 101vw;
+  height: 101vh;
+  background-color: #000000;
+  opacity: 0.6;
+  animation: background-cover-fade-in 0.5s cubic-bezier(0.2, 0.8, 0.6, 1);
+  -webkit-animation: background-cover-fade-in 0.5s cubic-bezier(0.2, 0.8, 0.6, 1);
+  -moz-animation: background-cover-fade-in 0.5s cubic-bezier(0.2, 0.8, 0.6, 1);
+}
+
+@keyframes background-cover-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.6;
+  }
+}
+
 /* desktop-ish */
 @media screen and (min-width: 415px) {
   button {
@@ -481,17 +502,17 @@ a:active {
     width: 654px;
   }
 
-  .search-bar .filter-results {
+  .search-bar .search-results {
     width: 658px;
   }
 
   .remove-filter:hover::after {
     content: 'Remove Filter';
-    text-align: end;
     position: absolute;
     top: 3px;
     left: 3px;
-    padding-top: 8px;
+    padding: 8px 0px 0px 5px;
+    text-align: center;
     color: #ffffff;
     background-color: #000000d8;
     width: calc(100% - 14px);
@@ -526,7 +547,7 @@ a:active {
     width: 85vw;
   }
 
-  .search-bar .filter-results {
+  .search-bar .search-results {
     width: 85vw;
   }
 
