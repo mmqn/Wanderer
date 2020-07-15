@@ -6,25 +6,26 @@ const Search = ({ uniqueValues, handleFiltering }) => {
   const [matchedFilters, setMatchedFilters] = useState([]);
   const [isInputFocused, setIsInputFocused] = useState(false);
 
-  const flatValues = useMemo(() => {
-    const flatUniqueValues = [];
+  // Flattened list of unique search options
+  const searchOptions = useMemo(() => {
+    const flatUniqueOptions = [];
     const properties = Object.keys(uniqueValues);
 
     properties.forEach(property => {
       uniqueValues[property].forEach(value => {
         const parsedValue = `${property}|${value}`;
-        flatUniqueValues.push(parsedValue);
+        flatUniqueOptions.push(parsedValue);
       });
     });
 
-    return flatUniqueValues;
+    return flatUniqueOptions;
   }, [uniqueValues]);
 
   const filterPlaces = query => {
     if (query) {
       const queryRegex = new RegExp(query, 'gi');
 
-      const results = flatValues.filter(value => queryRegex.test(value));
+      const results = searchOptions.filter(value => queryRegex.test(value));
 
       const filters = results.map(result => {
         const [targetFilterType, targetFilterValue] = result.split('|');
@@ -51,7 +52,10 @@ const Search = ({ uniqueValues, handleFiltering }) => {
           value={query}
           onChange={handleSearch}
           onFocus={() => setIsInputFocused(true)}
-          onBlur={() => setIsInputFocused(false)}
+          onBlur={() => {
+            setIsInputFocused(false);
+            setQuery('');
+          }}
         />
 
         {query.length > 0 && (

@@ -306,7 +306,7 @@ a:active {
 .card:hover {
   border: 1px solid #e4c200;
   margin-bottom: 24px;
-  box-shadow: 0px 3px 5px #372f00;
+  box-shadow: 0px 3px 5px #5b4e00;
 }
 
 .card h1 {
@@ -482,7 +482,7 @@ a:active {
 }
 
 /* desktop-ish */
-@media screen and (min-width: 415px) {
+@media screen and (min-width: 685px) {
   button {
     color: #ffffff;
     background-color: transparent;
@@ -535,7 +535,7 @@ a:active {
 }
 
 /* mobile-ish */
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 684px) {
   button {
     font-size: 0.9rem;
     color: #ffffff;

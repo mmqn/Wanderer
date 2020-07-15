@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles/App.css';
+import useWindowWidthWatcher from './util/useWindowWidthWatcher';
 import List from './List';
 import Map from './Map';
 import ErrorMessage from './components/ErrorMessage';
@@ -13,7 +14,9 @@ export default () => {
   const [places, setPlaces] = useState([]);
   const [isMapView, setIsMapView] = useState(true);
   const [minimizeHeader, setMinimizeHeader] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 415);
+
+  const windowWidth = useWindowWidthWatcher();
+  const isMobile = windowWidth < 685;
 
   const fetchData = async () => {
     const response = await fetch(PLACES_ENDPOINT);
@@ -32,25 +35,16 @@ export default () => {
     fetchData();
   }, []);
 
-  // TODO Use window width watcher custom hook
   useEffect(() => {
-    const handleUpdateHeaderSize = window.addEventListener('scroll', () => {
+    const handleUpdateHeaderSize = () => {
       if (window.pageYOffset >= 40) setMinimizeHeader(true);
       else if (window.pageYOffset < 40) setMinimizeHeader(false);
-    });
+    };
 
-    const handleUpdateIsMobile = window.addEventListener('resize', e => {
-      const { innerWidth } = e.target;
-
-      if (innerWidth >= 415) setIsMobile(false);
-      else if (innerWidth < 415) setIsMobile(true);
-    });
+    window.addEventListener('scroll', handleUpdateHeaderSize);
 
     // Run on unmounting; cleanup
-    return () => {
-      window.removeEventListener('sroll', handleUpdateHeaderSize);
-      window.removeEventListener('resize', handleUpdateIsMobile);
-    };
+    return () => window.removeEventListener('sroll', handleUpdateHeaderSize);
   }, []);
 
   return (
