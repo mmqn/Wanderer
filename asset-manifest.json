@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/wanderer/static/css/main.37bf2852.chunk.css",
-    "main.js": "/wanderer/static/js/main.3daa36f6.chunk.js",
-    "main.js.map": "/wanderer/static/js/main.3daa36f6.chunk.js.map",
+    "main.css": "/wanderer/static/css/main.ae106389.chunk.css",
+    "main.js": "/wanderer/static/js/main.3920ea7b.chunk.js",
+    "main.js.map": "/wanderer/static/js/main.3920ea7b.chunk.js.map",
     "runtime-main.js": "/wanderer/static/js/runtime-main.a13283cf.js",
     "runtime-main.js.map": "/wanderer/static/js/runtime-main.a13283cf.js.map",
     "static/css/2.b4a16772.chunk.css": "/wanderer/static/css/2.b4a16772.chunk.css",
     "static/js/2.b749e010.chunk.js": "/wanderer/static/js/2.b749e010.chunk.js",
     "static/js/2.b749e010.chunk.js.map": "/wanderer/static/js/2.b749e010.chunk.js.map",
     "index.html": "/wanderer/index.html",
-    "precache-manifest.80eaad0317641334ba3d793a2d41b746.js": "/wanderer/precache-manifest.80eaad0317641334ba3d793a2d41b746.js",
+    "precache-manifest.74d3fe2fd03967773b1187b81c6e1070.js": "/wanderer/precache-manifest.74d3fe2fd03967773b1187b81c6e1070.js",
     "service-worker.js": "/wanderer/service-worker.js",
     "static/css/2.b4a16772.chunk.css.map": "/wanderer/static/css/2.b4a16772.chunk.css.map",
-    "static/css/main.37bf2852.chunk.css.map": "/wanderer/static/css/main.37bf2852.chunk.css.map",
+    "static/css/main.ae106389.chunk.css.map": "/wanderer/static/css/main.ae106389.chunk.css.map",
     "static/js/2.b749e010.chunk.js.LICENSE.txt": "/wanderer/static/js/2.b749e010.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a13283cf.js",
     "static/css/2.b4a16772.chunk.css",
     "static/js/2.b749e010.chunk.js",
-    "static/css/main.37bf2852.chunk.css",
-    "static/js/main.3daa36f6.chunk.js"
+    "static/css/main.ae106389.chunk.css",
+    "static/js/main.3920ea7b.chunk.js"
   ]
 }
