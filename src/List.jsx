@@ -8,7 +8,7 @@ import MobileOptionsMenu from './components/MobileOptionsMenu.jsx';
 const List = ({ places, isMobile, mapboxKey }) => {
   const [currentPlaces, setCurrentPlaces] = useState([]);
   const [appliedFilters, setAppliedFilters] = useState([]);
-  const [condensedCards, setCondensedCards] = useState(true);
+  const [areAllCardsExpanded, setAreAllCardsExpanded] = useState(false);
   const [stackedView, setStackedView] = useState(false);
   // Currently open category when in stacked view
   const [currentSelectedCategory, setCurrentSelectedCategory] = useState('');
@@ -99,7 +99,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
 
   const handleCardsDensity = e => {
     e.stopPropagation();
-    setCondensedCards(prevValue => !prevValue);
+    setAreAllCardsExpanded(prevValue => !prevValue);
   };
 
   const handleCardsStacking = e => {
@@ -136,7 +136,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
                 <Card
                   key={place.id}
                   placeDetails={place}
-                  isCondensed={condensedCards}
+                  areAllCardsExpanded={areAllCardsExpanded}
                   isMobile={isMobile}
                   mapboxKey={mapboxKey}
                   handleFiltering={handleFiltering}
@@ -165,7 +165,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
         <Card
           key={place.id}
           placeDetails={place}
-          isCondensed={condensedCards}
+          areAllCardsExpanded={areAllCardsExpanded}
           isMobile={isMobile}
           mapboxKey={mapboxKey}
           handleFiltering={handleFiltering}
@@ -220,9 +220,9 @@ const List = ({ places, isMobile, mapboxKey }) => {
           <button
             type='button'
             style={{ position: 'fixed', bottom: '50px', right: '20px' }}
-            onClick={() => setCondensedCards(prevValue => !prevValue)}
+            onClick={() => setAreAllCardsExpanded(prevValue => !prevValue)}
           >
-            {condensedCards ? 'Expand All Cards' : 'Condense All Cards'}
+            {areAllCardsExpanded ? 'Condense All Cards' : 'Expand All Cards'}
           </button>
 
           <button

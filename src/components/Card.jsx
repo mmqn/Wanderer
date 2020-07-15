@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { locationPin } from '../components/icons';
 
 const Card = props => {
-  /* Card is open if `isCondensed` is true (sets all cards to open from <List>),
-  or if `openCard` is true (local) */
-  const [openCard, setOpenCard] = useState(false);
+  /* Card is open if `areAllCardsExpanded` prop is true (sets all cards to condensed from <List>),
+  or if `isExpanded` is true (local) */
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const { placeDetails, isCondensed, isMobile, isMinimal, mapboxKey } = props;
+  const { placeDetails, areAllCardsExpanded, isMobile, isMinimal, mapboxKey } = props;
 
   const {
     id,
@@ -40,6 +40,8 @@ const Card = props => {
     Coordinates.lng +
     '&travelmode=driving';
 
+  const handleToggleOpenCard = () => setIsExpanded(prevValue => !prevValue);
+
   const handleFiltering = ({ e, payload }) => {
     e.stopPropagation();
     props.handleFiltering(payload);
@@ -49,7 +51,7 @@ const Card = props => {
     <div
       className='card has-hidden-child'
       style={{ cursor: isMinimal ? 'auto' : 'pointer' }}
-      onClick={() => setOpenCard(!openCard)}
+      onClick={handleToggleOpenCard}
     >
       <h2 className='use-ellipsis'>{Name}</h2>
 
@@ -75,7 +77,7 @@ const Card = props => {
         ))}
       </div>
 
-      {(openCard || !isCondensed) && (
+      {(isExpanded || areAllCardsExpanded) && (
         <div className='card-details'>
           <p
             className='notes'
@@ -237,7 +239,7 @@ const Card = props => {
 
 Card.propTypes = {
   placeDetails: PropTypes.object.isRequired,
-  isCondensed: PropTypes.bool,
+  areAllCardsExpanded: PropTypes.bool,
   isMobile: PropTypes.bool,
   isMinimal: PropTypes.bool,
   mapboxKey: PropTypes.string,
@@ -245,7 +247,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  isCondensed: false,
+  areAllCardsExpanded: false,
   isMobile: false,
   isMinimal: false,
   mapboxKey: '',

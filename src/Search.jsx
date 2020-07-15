@@ -43,6 +43,21 @@ const Search = ({ uniqueValues, handleFiltering }) => {
     filterPlaces(query);
   };
 
+  const handleFocusInput = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleApplyFilter = filter => {
+    setQuery('');
+    setIsInputFocused(false);
+    handleFiltering(filter);
+  };
+
+  const handleCancelSearch = () => {
+    setQuery('');
+    setIsInputFocused(false);
+  };
+
   return (
     <>
       <div className='search-bar'>
@@ -51,11 +66,7 @@ const Search = ({ uniqueValues, handleFiltering }) => {
           placeholder={`Search ${uniqueValues.Address.length} places...`}
           value={query}
           onChange={handleSearch}
-          onFocus={() => setIsInputFocused(true)}
-          onBlur={() => {
-            setIsInputFocused(false);
-            setQuery('');
-          }}
+          onFocus={handleFocusInput}
         />
 
         {query.length > 0 && (
@@ -67,11 +78,7 @@ const Search = ({ uniqueValues, handleFiltering }) => {
                   className='filter-typevalue'
                   style={{ margin: '4px' }}
                   role='button'
-                  onClick={() => {
-                    setQuery('');
-                    setMatchedFilters([]);
-                    handleFiltering(filter);
-                  }}
+                  onClick={() => handleApplyFilter(filter)}
                 >
                   <div className='filter-type'>{filter.targetFilterType}</div>
 
@@ -85,7 +92,9 @@ const Search = ({ uniqueValues, handleFiltering }) => {
         )}
       </div>
 
-      {isInputFocused && <div className='background-cover' />}
+      {isInputFocused && (
+        <div className='background-cover' onClick={handleCancelSearch} />
+      )}
     </>
   );
 };
