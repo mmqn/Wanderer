@@ -47,12 +47,6 @@ const Search = ({ uniqueValues, handleFiltering }) => {
     setIsInputFocused(true);
   };
 
-  const handleApplyFilter = filter => {
-    setQuery('');
-    setIsInputFocused(false);
-    handleFiltering(filter);
-  };
-
   const handleCancelSearch = () => {
     setQuery('');
     setIsInputFocused(false);
@@ -72,19 +66,29 @@ const Search = ({ uniqueValues, handleFiltering }) => {
         {query.length > 0 && (
           <div className='search-results'>
             {matchedFilters.length > 0 ? (
-              matchedFilters.map((filter, i) => (
-                <div
-                  key={`${i}-${filter.targetFilterType}-${filter.targetFilterValue}`}
-                  className='filter-typevalue'
-                  style={{ margin: '4px' }}
-                  role='button'
-                  onClick={() => handleApplyFilter(filter)}
-                >
-                  <div className='filter-type'>{filter.targetFilterType}</div>
+              matchedFilters.map((filter, i) => {
+                const handleApplyFilter = () => {
+                  setQuery('');
+                  setIsInputFocused(false);
+                  handleFiltering(filter);
+                };
 
-                  <div className='filter-value'>{filter.targetFilterValue}</div>
-                </div>
-              ))
+                return (
+                  <div
+                    key={`${i}-${filter.targetFilterType}-${filter.targetFilterValue}`}
+                    className='filter-typevalue'
+                    style={{ margin: '4px' }}
+                    role='button'
+                    onClick={handleApplyFilter}
+                  >
+                    <div className='filter-type'>{filter.targetFilterType}</div>
+
+                    <div className='filter-value'>
+                      {filter.targetFilterValue}
+                    </div>
+                  </div>
+                );
+              })
             ) : (
               <span style={{ color: '#ffffff' }}>No results found 🌧</span>
             )}

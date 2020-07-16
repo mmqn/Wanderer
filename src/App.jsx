@@ -23,11 +23,11 @@ export default () => {
     const status = response.status;
     const data = await response.json();
 
-    if (status === 200) {
+    if (status === 200 && data) {
       setGoodResponse(true);
       setPlaces(data);
     } else {
-      console.warn(status, response);
+      console.warn({ status, response });
     }
   };
 
@@ -47,6 +47,8 @@ export default () => {
     return () => window.removeEventListener('sroll', handleUpdateHeaderSize);
   }, []);
 
+  const handleToggleView = () => setIsMapView(prevValue => !prevValue);
+
   return (
     <>
       <h1
@@ -54,7 +56,7 @@ export default () => {
         className={`header ${
           minimizeHeader ? 'minimize-header' : 'maximize-header'
         }`}
-        onClick={() => setIsMapView(prevValue => !prevValue)}
+        onClick={handleToggleView}
       >
         Wanderer
       </h1>

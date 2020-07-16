@@ -5,8 +5,8 @@ import { expand, stack } from '../components/icons';
 const MobileOptionsMenu = ({
   appliedFilters,
   handleRemoveFilter,
-  handleCardsDensity,
-  handleCardsStacking,
+  handleToggleCardsDensity,
+  handleToggleStackedView,
 }) => {
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -16,11 +16,13 @@ const MobileOptionsMenu = ({
     setOpenMenu(false);
   }, [hasAppliedFilters]);
 
+  const handleOpenMenu = () => setOpenMenu(hasAppliedFilters && !openMenu);
+
   return (
     <div
       style={openMenu && hasAppliedFilters ? { height: '110px' } : {}}
       className='mobile-command-bar'
-      onClick={() => setOpenMenu(hasAppliedFilters && !openMenu)}
+      onClick={handleOpenMenu}
     >
       <div>
         {hasAppliedFilters && (
@@ -42,7 +44,7 @@ const MobileOptionsMenu = ({
           <button
             type='button'
             style={{ padding: '8px' }}
-            onClick={handleCardsDensity}
+            onClick={handleToggleCardsDensity}
           >
             {expand}
           </button>
@@ -50,7 +52,7 @@ const MobileOptionsMenu = ({
           <button
             type='button'
             style={{ padding: '8px' }}
-            onClick={handleCardsStacking}
+            onClick={handleToggleStackedView}
           >
             {stack}
           </button>
@@ -97,8 +99,8 @@ MobileOptionsMenu.propTypes = {
     }),
   ).isRequired,
   handleRemoveFilter: PropTypes.func.isRequired,
-  handleCardsDensity: PropTypes.func.isRequired,
-  handleCardsStacking: PropTypes.func.isRequired,
+  handleToggleCardsDensity: PropTypes.func.isRequired,
+  handleToggleStackedView: PropTypes.func.isRequired,
 };
 
 export default MobileOptionsMenu;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Search from './Search.jsx';
 import Card from './components/Card';
@@ -97,20 +97,14 @@ const List = ({ places, isMobile, mapboxKey }) => {
     applyFilters(filteredAppliedFilters);
   };
 
-  const handleCardsDensity = e => {
+  const handleToggleCardsDensity = e => {
     e.stopPropagation();
     setAreAllCardsExpanded(prevValue => !prevValue);
   };
 
-  const handleCardsStacking = e => {
+  const handleToggleStackedView = e => {
     e.stopPropagation();
     setStackedView(prevValue => !prevValue);
-  };
-
-  const handleShowCategoryPlaces = selectedCategory => {
-    if (selectedCategory === currentSelectedCategory) {
-      setCurrentSelectedCategory('');
-    } else setCurrentSelectedCategory(selectedCategory);
   };
 
   const cardsContainer = stackedView ? (
@@ -120,14 +114,21 @@ const List = ({ places, isMobile, mapboxKey }) => {
           place.Categories.includes(category),
         );
 
+        const handleShowCategoryPlaces = () => {
+          if (category === currentSelectedCategory) {
+            setCurrentSelectedCategory('');
+          } else {
+            setCurrentSelectedCategory(category);
+          }
+        };
+
         if (category === currentSelectedCategory) {
           return (
-            <>
+            <Fragment key={category}>
               <div
-                key={category}
                 className='card card-stacked'
                 role='button'
-                onClick={() => handleShowCategoryPlaces(category)}
+                onClick={handleShowCategoryPlaces}
               >
                 <h1>{category}</h1>
               </div>
@@ -142,7 +143,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
                   handleFiltering={handleFiltering}
                 />
               ))}
-            </>
+            </Fragment>
           );
         } else if (placesInCategory.length > 0) {
           return (
@@ -150,7 +151,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
               key={category}
               className='card card-stacked'
               role='button'
-              onClick={() => handleShowCategoryPlaces(category)}
+              onClick={handleShowCategoryPlaces}
             >
               <h1>{category}</h1>
             </div>
@@ -184,8 +185,8 @@ const List = ({ places, isMobile, mapboxKey }) => {
         <MobileOptionsMenu
           appliedFilters={appliedFilters}
           handleRemoveFilter={handleRemoveFilter}
-          handleCardsDensity={handleCardsDensity}
-          handleCardsStacking={handleCardsStacking}
+          handleToggleCardsDensity={handleToggleCardsDensity}
+          handleToggleStackedView={handleToggleStackedView}
         />
       ) : (
         <>
@@ -220,7 +221,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
           <button
             type='button'
             style={{ position: 'fixed', bottom: '50px', right: '20px' }}
-            onClick={() => setAreAllCardsExpanded(prevValue => !prevValue)}
+            onClick={handleToggleCardsDensity}
           >
             {areAllCardsExpanded ? 'Condense All Cards' : 'Expand All Cards'}
           </button>
@@ -228,7 +229,7 @@ const List = ({ places, isMobile, mapboxKey }) => {
           <button
             type='button'
             style={{ position: 'fixed', bottom: '15px', right: '20px' }}
-            onClick={() => setStackedView(prevValue => !prevValue)}
+            onClick={handleToggleStackedView}
           >
             Switch to {stackedView ? 'Singles' : 'Stacks'} View
           </button>
