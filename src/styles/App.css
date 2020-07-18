@@ -262,14 +262,11 @@ a:active {
 }
 
 .cards-container {
-  width: 98vw;
   padding-top: 200px;
 }
 
 .card {
   position: relative;
-  min-height: 80px;
-  max-height: 220px;
   padding: 12px 22px 18px;
   background-color: #0f0f0f;
   color: #ffffff;
@@ -546,11 +543,11 @@ a:active {
   }
 
   .search-bar input {
-    width: 88vw;
+    width: 86vw;
   }
 
   .search-bar .search-results {
-    width: 89vw;
+    width: 87vw;
   }
 
   .card-details {
@@ -563,7 +560,7 @@ a:active {
 
   .card {
     margin: 22px 16px;
-    max-height: none;
+    width: 80vw;
   }
 
   .map-card-container {
