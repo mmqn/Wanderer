@@ -262,6 +262,7 @@ a:active {
 }
 
 .cards-container {
+  width: 98vw;
   padding-top: 200px;
 }
 
@@ -468,7 +469,8 @@ a:active {
   background-color: #000000;
   opacity: 0.6;
   animation: background-cover-fade-in 0.5s cubic-bezier(0.2, 0.8, 0.6, 1);
-  -webkit-animation: background-cover-fade-in 0.5s cubic-bezier(0.2, 0.8, 0.6, 1);
+  -webkit-animation: background-cover-fade-in 0.5s
+    cubic-bezier(0.2, 0.8, 0.6, 1);
   -moz-animation: background-cover-fade-in 0.5s cubic-bezier(0.2, 0.8, 0.6, 1);
 }
 
