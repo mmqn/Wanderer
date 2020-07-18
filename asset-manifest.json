@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/wanderer/static/css/main.e223cf87.chunk.css",
+    "main.css": "/wanderer/static/css/main.10e18afd.chunk.css",
     "main.js": "/wanderer/static/js/main.1adcc0e5.chunk.js",
     "main.js.map": "/wanderer/static/js/main.1adcc0e5.chunk.js.map",
     "runtime-main.js": "/wanderer/static/js/runtime-main.a13283cf.js",
@@ -9,17 +9,17 @@
     "static/js/2.b749e010.chunk.js": "/wanderer/static/js/2.b749e010.chunk.js",
     "static/js/2.b749e010.chunk.js.map": "/wanderer/static/js/2.b749e010.chunk.js.map",
     "index.html": "/wanderer/index.html",
-    "precache-manifest.a533faa16006e28c3043cdffddc23786.js": "/wanderer/precache-manifest.a533faa16006e28c3043cdffddc23786.js",
+    "precache-manifest.8ef020b5cce68ee21b246807cd583477.js": "/wanderer/precache-manifest.8ef020b5cce68ee21b246807cd583477.js",
     "service-worker.js": "/wanderer/service-worker.js",
     "static/css/2.b4a16772.chunk.css.map": "/wanderer/static/css/2.b4a16772.chunk.css.map",
-    "static/css/main.e223cf87.chunk.css.map": "/wanderer/static/css/main.e223cf87.chunk.css.map",
+    "static/css/main.10e18afd.chunk.css.map": "/wanderer/static/css/main.10e18afd.chunk.css.map",
     "static/js/2.b749e010.chunk.js.LICENSE.txt": "/wanderer/static/js/2.b749e010.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a13283cf.js",
     "static/css/2.b4a16772.chunk.css",
     "static/js/2.b749e010.chunk.js",
-    "static/css/main.e223cf87.chunk.css",
+    "static/css/main.10e18afd.chunk.css",
     "static/js/main.1adcc0e5.chunk.js"
   ]
 }
