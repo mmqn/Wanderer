@@ -7,7 +7,13 @@ const Card = props => {
   or if `isExpanded` is true (local) */
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const { placeDetails, areAllCardsExpanded, isMobile, isMinimal, mapboxKey } = props;
+  const {
+    placeDetails,
+    areAllCardsExpanded,
+    isMobile,
+    isMinimal,
+    mapboxKey,
+  } = props;
 
   const {
     id,
@@ -77,11 +83,11 @@ const Card = props => {
         ))}
       </div>
 
-      {(isExpanded || areAllCardsExpanded) && (
+      {(isExpanded || areAllCardsExpanded || isMinimal) && (
         <div className='card-details'>
           <p
             className='notes'
-            style={{ maxWidth: isMinimal ? '100%' : '220px' }}
+            style={isMobile ? {} : { maxWidth: isMinimal ? '100%' : '220px' }}
           >
             {Notes}
           </p>
